@@ -46,7 +46,7 @@ public final class Constants {
     public static final double SPEED = 1f;
   }
 
-  public static final class OperatorConstants {
+  public static final class ControllerConstants {
     public static final int DRIVER_CONTROLLER_PORT = 0;
     public static final int OPERATOR_CONTROLLER_PORT = 0;
   }

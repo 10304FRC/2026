@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.function.DoubleSupplier;
-
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -76,6 +74,7 @@ public class CANDriveSubsystem extends SubsystemBase {
   public void periodic() {}
 
   public Command run(double x, double rot) {
-    return Commands.runOnce(() -> drive.arcadeDrive(x, rot), this);
+    // Negative to stop inversion
+    return Commands.runOnce(() -> drive.arcadeDrive(-x, -rot), this);
   }
 }

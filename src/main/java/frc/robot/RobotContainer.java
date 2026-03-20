@@ -6,12 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Drive;
-import frc.robot.commands.Intake;
-import frc.robot.commands.Shoot;
-import frc.robot.commands.Spin;
+import frc.robot.Constants.ControllerConstants;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANIntakeSubsystem;
 import frc.robot.subsystems.CANShooterSubsystem;
@@ -30,16 +25,16 @@ public class RobotContainer {
   // The robot's subsystems
   private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
   private final CANShooterSubsystem shooterSubsystem = new CANShooterSubsystem();
-  // private final CANSpindexerSubsystem spindexerSubsystem = new CANSpindexerSubsystem();
+  private final CANSpindexerSubsystem spindexerSubsystem = new CANSpindexerSubsystem();
   private final CANIntakeSubsystem intakeSubsystem = new CANIntakeSubsystem();
 
   // The driver's controller
   private final CommandXboxController driverController = new CommandXboxController(
-      OperatorConstants.DRIVER_CONTROLLER_PORT);
+      ControllerConstants.DRIVER_CONTROLLER_PORT);
 
   // The operator's controller
   private final CommandXboxController operatorController = new CommandXboxController(
-      OperatorConstants.OPERATOR_CONTROLLER_PORT);
+      ControllerConstants.OPERATOR_CONTROLLER_PORT);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -68,18 +63,16 @@ public class RobotContainer {
     // controller. The Y axis of the controller is inverted so that pushing the
     // stick away from you (a negative value) drives the robot forwards (a positive
     // value)
-    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, driverController));
+    driveSubsystem.setDefaultCommand(driveSubsystem.run(driverController.getLeftY(), driverController.getRightX()));
   }
 
   public void configureTestBindings() {
-  //  driveSubsystem.setDefaultCommand(
-  //      driveSubsystem.driveArcade(
-  //          driveSubsystem, () -> -driverController.getLeftY() + (.15 * Math.signum(DriveConstants.DRIVE_SPEED) * Math.signum(-driverController.getLeftY())), () -> -driverController.getRightX()));
+  driveSubsystem.setDefaultCommand(driveSubsystem.run(driverController.getLeftY(), driverController.getRightX()));
   
-    operatorController.rightTrigger().whileTrue(new Shoot(shooterSubsystem));
+    operatorController.rightTrigger().whileTrue(shooterSubsystem.run());
 
-    //operatorController.rightTrigger().whileTrue(new Spin(spindexerSubsystem));
+    operatorController.rightTrigger().whileTrue(spindexerSubsystem.run());
 
-    operatorController.leftTrigger().whileTrue(new Intake(intakeSubsystem));
+    operatorController.leftTrigger().whileTrue(intakeSubsystem.run());
   }
 }
