@@ -23,7 +23,8 @@ public class Drive extends Command {
 
     @Override
     public void execute() {
-        sub.drive(controller.getLeftY() * DriveConstants.DRIVE_SPEED, controller.getRightX() * DriveConstants.TURN_SPEED);
+        // Need to negate right, otherwise it's inverted
+        sub.drive(controller.getLeftY() * DriveConstants.DRIVE_SPEED, -controller.getRightX() * DriveConstants.TURN_SPEED);
     }
 
     @Override
