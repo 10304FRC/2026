@@ -30,4 +30,8 @@ public class CANShooterSubsystem extends SubsystemBase {
 
         followerController.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
+
+    public Command run() {
+        return Commands.runOnce(() -> leaderController.set(ShooterConstants.SPEED), this).andThen(() -> leaderController.set(0), this);
+    }
 }

@@ -75,7 +75,7 @@ public class CANDriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {}
 
-  public void drive(double x, double rot) {
-    drive.arcadeDrive(x, rot);
+  public Command run(double x, double rot) {
+    return Commands.runOnce(() -> drive.arcadeDrive(x, rot), this);
   }
 }

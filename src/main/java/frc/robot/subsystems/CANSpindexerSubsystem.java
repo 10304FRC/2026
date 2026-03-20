@@ -23,4 +23,8 @@ public class CANSpindexerSubsystem extends SubsystemBase {
 
         controller.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
+
+    public Command run() {
+        return Commands.runOnce(() -> controller.set(SpindexerConstants.SPEED), this).andThen(() -> controller.set(0), this);
+    }
 }

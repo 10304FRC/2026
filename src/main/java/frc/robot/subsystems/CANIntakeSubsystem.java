@@ -23,4 +23,8 @@ public class CANIntakeSubsystem extends SubsystemBase {
 
         controller.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
+
+    public Command run() {
+        return Commands.runOnce(() -> controller.set(IntakeConstants.SPEED), this).andThen(() -> controller.set(0), this);
+    }
 }
