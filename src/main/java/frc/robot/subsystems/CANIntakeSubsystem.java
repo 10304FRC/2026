@@ -20,6 +20,7 @@ public class CANIntakeSubsystem extends SubsystemBase {
 
         config.voltageCompensation(12);
         config.smartCurrentLimit(SparkMaxConstants.CURRENT_LIMIT);
+        config.inverted(true);
 
         controller.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }

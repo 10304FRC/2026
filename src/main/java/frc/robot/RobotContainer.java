@@ -74,9 +74,9 @@ public class RobotContainer {
     // value)
     driveSubsystem.setDefaultCommand(driveSubsystem.run(() -> driverController.getLeftY(), () -> driverController.getRightX(), false));
 
-    operatorController.rightTrigger().whileTrue(shooterSubsystem.run(spindexerSubsystem));
+    intakeSubsystem.setDefaultCommand(intakeSubsystem.run());
 
-    operatorController.leftTrigger().whileTrue(intakeSubsystem.run());
+    operatorController.rightTrigger().whileTrue(shooterSubsystem.run(spindexerSubsystem));
   }
 
   public void configureTestBindings() {
