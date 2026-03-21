@@ -12,6 +12,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.Constants.DriveConstants;
@@ -77,7 +78,15 @@ public class CANDriveSubsystem extends SubsystemBase {
   // That's why you have to put false for isFinished for it to never stop
   public Command run(DoubleSupplier x, DoubleSupplier rot, Boolean isFinished) {
     // Negative to stop inversion
-    return Commands.run(() -> drive.arcadeDrive(-x.getAsDouble(), -rot.getAsDouble()), this).alongWith(Commands.print("Drive"));
+
+    // Had to do all this just for a isFinished param -_-
+    return new FunctionalCommand(() -> {}, () -> {
+      Timer timer = new Timer();
+      timer.start();
+      
+
+      drive.arcadeDrive(-x.getAsDouble() * Math.min((timer.get() / DriveConstants.ACCELERATION_SECONDS), 1), -rot.getAsDouble() * Math.min((timer.get() / DriveConstants.ACCELERATION_SECONDS), 1));
+    }, bool -> {}, () -> isFinished, this);
   }
 
   public Command dropIntake() {

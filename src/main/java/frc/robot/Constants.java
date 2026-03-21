@@ -25,6 +25,9 @@ public final class Constants {
 
     public static final double DRIVE_SPEED = .40;
     public static final double TURN_SPEED = .65;
+
+    // How many seconds it takes to accelerate to full
+    public static final double ACCELERATION_SECONDS = 2;
   }
 
   public static final class ShooterConstants {
