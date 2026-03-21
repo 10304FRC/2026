@@ -34,8 +34,8 @@ public class RobotContainer {
       ControllerConstants.DRIVER_CONTROLLER_PORT);
 
   // The operator's controller
-  private final CommandXboxController operatorController = new CommandXboxController(
-      ControllerConstants.OPERATOR_CONTROLLER_PORT);
+  // private final CommandXboxController operatorController = new CommandXboxController(
+  //     ControllerConstants.OPERATOR_CONTROLLER_PORT);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -68,12 +68,12 @@ public class RobotContainer {
   }
 
   public void configureTestBindings() {
-  driveSubsystem.setDefaultCommand(driveSubsystem.run(driverController.getLeftY(), driverController.getRightX()));
-  
-    operatorController.rightTrigger().whileTrue(shooterSubsystem.run().alongWith(Commands.print("Shoot")));
+    driveSubsystem.setDefaultCommand(driveSubsystem.run(driverController.getLeftY(), driverController.getRightX()));
 
-    operatorController.rightTrigger().whileTrue(spindexerSubsystem.run().alongWith(Commands.print("Spin")));
+    // operatorController.rightTrigger().whileTrue(shooterSubsystem.run().alongWith(Commands.print("Shoot")));
 
-    operatorController.leftTrigger().whileTrue(intakeSubsystem.run().alongWith(Commands.print("Intake")));
+    // operatorController.rightTrigger().whileTrue(spindexerSubsystem.run().alongWith(Commands.print("Spin")));
+
+    // operatorController.leftTrigger().whileTrue(intakeSubsystem.run().alongWith(Commands.print("Intake")));
   }
 }
