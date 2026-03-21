@@ -28,6 +28,8 @@ public final class Constants {
 
     // How many seconds it takes to accelerate to full
     public static final double ACCELERATION_SECONDS = 2;
+
+    public static final double DEADZONE = .1f;
   }
 
   public static final class ShooterConstants {

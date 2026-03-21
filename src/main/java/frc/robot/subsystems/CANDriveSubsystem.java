@@ -79,11 +79,20 @@ public class CANDriveSubsystem extends SubsystemBase {
   public Command run(DoubleSupplier x, DoubleSupplier rot, Boolean isFinished) {
     // Negative to stop inversion
 
-    // Had to do all this just for a isFinished param -_-
+    // Had to do a whole functional command just for a isFinished param -_-
+
+    // HOLY TERRIBLE CODE
+    // THIS IS HOT GARBAGE
+    // ABSOLUTE VALUE, MULTIPLICATION, IF STATEMENTS, AND DIVISION??
+    // Oh well, it's not like we need every bit of performance. It'll suck, but I hope there's no latency
+    // It's so ugly that I might just come back to it later. Maybe I could give the code team a challenge with this. It'd just infuriate them.
+
+    // It'd be nice to use init for starting the timer, but there's scope issues
     return new FunctionalCommand(() -> {}, () -> {
       Timer timer = new Timer();
       timer.start();
       
+      if (Math.abs(x.getAsDouble()) + Math.abs(rot.getAsDouble()) > DriveConstants.DEADZONE) timer.restart();
       
       drive.arcadeDrive(-x.getAsDouble() * Math.min((timer.get() / DriveConstants.ACCELERATION_SECONDS), 1), -rot.getAsDouble() * Math.min((timer.get() / DriveConstants.ACCELERATION_SECONDS), 1));
     }, bool -> {}, () -> isFinished, this);
