@@ -34,8 +34,8 @@ public class RobotContainer {
       ControllerConstants.DRIVER_CONTROLLER_PORT);
 
   // The operator's controller
-  // private final CommandXboxController operatorController = new CommandXboxController(
-  //     ControllerConstants.OPERATOR_CONTROLLER_PORT);
+  private final CommandXboxController operatorController = new CommandXboxController(
+      ControllerConstants.OPERATOR_CONTROLLER_PORT);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -64,22 +64,14 @@ public class RobotContainer {
     // controller. The Y axis of the controller is inverted so that pushing the
     // stick away from you (a negative value) drives the robot forwards (a positive
     // value)
-    driveSubsystem.setDefaultCommand(driveSubsystem.run(() -> driverController.getLeftY(), () -> driverController.getRightX()));
+    driveSubsystem.setDefaultCommand(driveSubsystem.run(() -> driverController.getLeftY(), () -> driverController.getRightX(), false));
 
-    // operatorController.rightTrigger().whileTrue(shooterSubsystem.run().alongWith(Commands.print("Shoot")));
+    operatorController.rightTrigger().whileTrue(shooterSubsystem.run(spindexerSubsystem));
 
-    // operatorController.rightTrigger().whileTrue(spindexerSubsystem.run().alongWith(Commands.print("Spin")));
-
-    // operatorController.leftTrigger().whileTrue(intakeSubsystem.run().alongWith(Commands.print("Intake")));
+    operatorController.leftTrigger().whileTrue(intakeSubsystem.run());
   }
 
   public void configureTestBindings() {
-    driveSubsystem.setDefaultCommand(driveSubsystem.run(() -> driverController.getLeftY(), () -> driverController.getRightX()));
-
-    // operatorController.rightTrigger().whileTrue(shooterSubsystem.run().alongWith(Commands.print("Shoot")));
-
-    // operatorController.rightTrigger().whileTrue(spindexerSubsystem.run().alongWith(Commands.print("Spin")));
-
-    // operatorController.leftTrigger().whileTrue(intakeSubsystem.run().alongWith(Commands.print("Intake")));
+    configureBindings();
   }
 }

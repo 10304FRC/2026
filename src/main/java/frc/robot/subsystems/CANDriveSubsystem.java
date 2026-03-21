@@ -15,6 +15,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.SparkMaxConstants;
@@ -75,8 +76,14 @@ public class CANDriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {}
 
-  public Command run(DoubleSupplier x, DoubleSupplier rot) {
+  // No default parameters in Java :< (Seriously? This is a modern language)
+  // That's why you have to put false for isFinished for it to never stop
+  public Command run(DoubleSupplier x, DoubleSupplier rot, Boolean isFinished) {
     // Negative to stop inversion
     return Commands.run(() -> drive.arcadeDrive(-x.getAsDouble(), -rot.getAsDouble()), this).alongWith(Commands.print("Drive"));
+  }
+
+  public Command dropIntake() {
+    return run(() -> 1, () -> 0, true);
   }
 }
