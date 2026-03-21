@@ -84,7 +84,7 @@ public class CANDriveSubsystem extends SubsystemBase {
       Timer timer = new Timer();
       timer.start();
       
-
+      
       drive.arcadeDrive(-x.getAsDouble() * Math.min((timer.get() / DriveConstants.ACCELERATION_SECONDS), 1), -rot.getAsDouble() * Math.min((timer.get() / DriveConstants.ACCELERATION_SECONDS), 1));
     }, bool -> {}, () -> isFinished, this);
   }
