@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ControllerConstants;
@@ -69,10 +70,10 @@ public class RobotContainer {
   public void configureTestBindings() {
   driveSubsystem.setDefaultCommand(driveSubsystem.run(driverController.getLeftY(), driverController.getRightX()));
   
-    operatorController.rightTrigger().whileTrue(shooterSubsystem.run());
+    operatorController.rightTrigger().whileTrue(shooterSubsystem.run().alongWith(Commands.print("Shoot")));
 
-    operatorController.rightTrigger().whileTrue(spindexerSubsystem.run());
+    operatorController.rightTrigger().whileTrue(spindexerSubsystem.run().alongWith(Commands.print("Spin")));
 
-    operatorController.leftTrigger().whileTrue(intakeSubsystem.run());
+    operatorController.leftTrigger().whileTrue(intakeSubsystem.run().alongWith(Commands.print("Intake")));
   }
 }

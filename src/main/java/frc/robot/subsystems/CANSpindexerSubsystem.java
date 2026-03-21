@@ -25,6 +25,6 @@ public class CANSpindexerSubsystem extends SubsystemBase {
     }
 
     public Command run() {
-        return Commands.runOnce(() -> controller.set(SpindexerConstants.SPEED), this).andThen(() -> controller.set(0), this);
+        return Commands.runEnd(() -> controller.set(SpindexerConstants.SPEED), () -> controller.set(0), this);
     }
 }

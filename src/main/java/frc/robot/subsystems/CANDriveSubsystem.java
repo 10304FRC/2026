@@ -75,6 +75,6 @@ public class CANDriveSubsystem extends SubsystemBase {
 
   public Command run(double x, double rot) {
     // Negative to stop inversion
-    return Commands.runOnce(() -> drive.arcadeDrive(-x, -rot), this);
+    return Commands.run(() -> drive.arcadeDrive(-x, -rot), this).alongWith(Commands.print("Drive"));
   }
 }

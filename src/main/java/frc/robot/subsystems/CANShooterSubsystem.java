@@ -32,6 +32,6 @@ public class CANShooterSubsystem extends SubsystemBase {
     }
 
     public Command run() {
-        return Commands.runOnce(() -> leaderController.set(ShooterConstants.SPEED), this).andThen(() -> leaderController.set(0), this);
+        return Commands.runEnd(() -> leaderController.set(ShooterConstants.SPEED), () -> leaderController.set(0), this);
     }
 }
