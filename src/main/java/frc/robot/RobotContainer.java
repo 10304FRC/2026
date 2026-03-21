@@ -4,10 +4,14 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ControllerConstants;
+import frc.robot.commands.Autos;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANIntakeSubsystem;
 import frc.robot.subsystems.CANShooterSubsystem;
@@ -37,11 +41,15 @@ public class RobotContainer {
   private final CommandXboxController operatorController = new CommandXboxController(
       ControllerConstants.OPERATOR_CONTROLLER_PORT);
 
+  private final SendableChooser<Command> autoChooser = new SendableChooser<Command>();
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-
+    autoChooser.setDefaultOption("Center Score", Autos.shootCenter(driveSubsystem, shooterSubsystem, spindexerSubsystem));
+  
+    SmartDashboard.putData("Auto", autoChooser);
   }
 
   /**
@@ -73,5 +81,9 @@ public class RobotContainer {
 
   public void configureTestBindings() {
     configureBindings();
+  }
+
+  public Command getAuto() {
+    return autoChooser.getSelected();
   }
 }
