@@ -35,7 +35,7 @@ public class CANShooterSubsystem extends SubsystemBase {
         return Commands.runEnd(() -> leaderController.set(ShooterConstants.SPEED), () -> leaderController.set(0), this);
     }
 
-    public ParallelCommandGroup run(CANSpindexerSubsystem spinSub) {
-        return new ParallelCommandGroup(run(), spinSub.run());
+    public ParallelCommandGroup run(CANSpindexerSubsystem spinSub, CANIntakeSubsystem intakeSub) {
+        return new ParallelCommandGroup(run(), spinSub.run(), intakeSub.run());
     }
 }

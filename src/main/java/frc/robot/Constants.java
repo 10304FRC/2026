@@ -36,7 +36,7 @@ public final class Constants {
     public static final int LEADER_ID = 7;
     public static final int FOLLOWER_ID = 8;
 
-    public static final double SPEED = 1f;
+    public static final double SPEED = .5f;
   }
 
   public static final class SpindexerConstants {
@@ -48,7 +48,7 @@ public final class Constants {
   public static final class IntakeConstants {
     public static final int MOTOR_ID = 6;
 
-    public static final double SPEED = 1f;
+    public static final double SPEED = .1f;
   }
 
   public static final class ControllerConstants {

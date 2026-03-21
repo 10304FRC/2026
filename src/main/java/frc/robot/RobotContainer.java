@@ -11,10 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.commands.Autos;
-import frc.robot.subsystems.CANDriveSubsystem;
-import frc.robot.subsystems.CANIntakeSubsystem;
-import frc.robot.subsystems.CANShooterSubsystem;
-import frc.robot.subsystems.CANSpindexerSubsystem;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -46,7 +43,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    autoChooser.setDefaultOption("Center Score", Autos.shootCenter(driveSubsystem, shooterSubsystem, spindexerSubsystem));
+    autoChooser.setDefaultOption("Center Score", Autos.shootCenter(driveSubsystem, shooterSubsystem, spindexerSubsystem, intakeSubsystem));
   
     SmartDashboard.putData("Auto", autoChooser);
   }
@@ -73,9 +70,9 @@ public class RobotContainer {
     // value)
     driveSubsystem.setDefaultCommand(driveSubsystem.run(() -> driverController.getLeftY(), () -> driverController.getRightX(), false));
 
-    intakeSubsystem.setDefaultCommand(intakeSubsystem.run());
+    operatorController.leftTrigger().whileTrue(intakeSubsystem.run());
 
-    operatorController.rightTrigger().whileTrue(shooterSubsystem.run(spindexerSubsystem));
+    operatorController.rightTrigger().whileTrue(shooterSubsystem.run(spindexerSubsystem, intakeSubsystem));
   }
 
   public void configureTestBindings() {

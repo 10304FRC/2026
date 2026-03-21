@@ -26,6 +26,6 @@ public class CANIntakeSubsystem extends SubsystemBase {
     }
 
     public Command run() {
-        return Commands.runEnd(() -> controller.set(IntakeConstants.SPEED), () -> controller.set(0), this);
+        return Commands.runEnd(() -> controller.set(-IntakeConstants.SPEED), () -> controller.set(0), this);
     }
 }
