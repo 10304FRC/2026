@@ -24,9 +24,10 @@ public class CANShooterSubsystem extends SubsystemBase {
         config.voltageCompensation(12);
         
         // No persist just in case some config is messed up, we use only the ones we define
+        config.inverted(true);
         leaderController.configure(config, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
 
-        config.follow(ShooterConstants.LEADER_ID, true);
+        config.follow(ShooterConstants.LEADER_ID, false);
 
         followerController.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }

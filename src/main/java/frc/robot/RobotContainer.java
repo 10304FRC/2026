@@ -63,14 +63,11 @@ public class RobotContainer {
    * joysticks}.
    */
   public void configureBindings() {
-    // Set the default command for the drive subsystem to the command provided by
-    // factory with the values provided by the joystick axes on the driver
-    // controller. The Y axis of the controller is inverted so that pushing the
-    // stick away from you (a negative value) drives the robot forwards (a positive
-    // value)
     driveSubsystem.setDefaultCommand(driveSubsystem.run(() -> driverController.getLeftY(), () -> driverController.getRightX(), false));
 
     operatorController.leftTrigger().whileTrue(intakeSubsystem.run());
+
+    operatorController.leftBumper().whileTrue(intakeSubsystem.runInverse()).whileTrue(spindexerSubsystem.run());
 
     operatorController.rightTrigger().whileTrue(shooterSubsystem.run(spindexerSubsystem, intakeSubsystem));
   }

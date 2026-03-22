@@ -23,32 +23,27 @@ public final class Constants {
     public static final int RIGHT_LEADER_ID = 3;
     public static final int RIGHT_FOLLOWER_ID = 4;
 
-    public static final double DRIVE_SPEED = .40;
-    public static final double TURN_SPEED = .65;
-
-    // How many seconds it takes to accelerate to full
-    public static final double ACCELERATION_SECONDS = 2;
-
-    public static final double DEADZONE = .1f;
+    public static final double DRIVE_SPEED = .30;
+    public static final double TURN_SPEED = .45;
   }
 
   public static final class ShooterConstants {
     public static final int LEADER_ID = 7;
     public static final int FOLLOWER_ID = 8;
 
-    public static final double SPEED = .5f;
+    public static final double SPEED = .75f;
   }
 
   public static final class SpindexerConstants {
     public static final int MOTOR_ID = 5;
 
-    public static final double SPEED = .2f;
+    public static final double SPEED = .4f;
   }
 
   public static final class IntakeConstants {
     public static final int MOTOR_ID = 6;
 
-    public static final double SPEED = .1f;
+    public static final double SPEED = .3f;
   }
 
   public static final class ControllerConstants {
