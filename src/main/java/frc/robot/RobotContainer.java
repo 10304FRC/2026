@@ -44,7 +44,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
     autoChooser.setDefaultOption("Center Score", Autos.shootCenter(driveSubsystem, shooterSubsystem, spindexerSubsystem, intakeSubsystem));
-  
+    autoChooser.addOption("Move To Center", Autos.moveToCenter(driveSubsystem));
+
     SmartDashboard.putData("Auto", autoChooser);
   }
 
@@ -65,11 +66,14 @@ public class RobotContainer {
   public void configureBindings() {
     driveSubsystem.setDefaultCommand(driveSubsystem.run(() -> driverController.getLeftY(), () -> driverController.getRightX(), false));
 
-    operatorController.leftTrigger().whileTrue(intakeSubsystem.run());
+    // Defense ^^
+    // Yippeeee
 
-    operatorController.leftBumper().whileTrue(intakeSubsystem.runInverse()).whileTrue(spindexerSubsystem.run());
+    // operatorController.leftTrigger().whileTrue(intakeSubsystem.run());
 
-    operatorController.rightTrigger().whileTrue(shooterSubsystem.run(spindexerSubsystem, intakeSubsystem));
+    // operatorController.leftBumper().whileTrue(intakeSubsystem.runInverse()).whileTrue(spindexerSubsystem.run());
+
+    // operatorController.rightTrigger().whileTrue(shooterSubsystem.run(spindexerSubsystem, intakeSubsystem));
   }
 
   public void configureTestBindings() {

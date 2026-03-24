@@ -23,8 +23,8 @@ public final class Constants {
     public static final int RIGHT_LEADER_ID = 3;
     public static final int RIGHT_FOLLOWER_ID = 4;
 
-    public static final double DRIVE_SPEED = .30;
-    public static final double TURN_SPEED = .45;
+    public static final double DRIVE_SPEED = .40;
+    public static final double TURN_SPEED = .50;
   }
 
   public static final class ShooterConstants {

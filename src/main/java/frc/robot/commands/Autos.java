@@ -11,8 +11,13 @@ public class Autos {
         CANDriveSubsystem drive,
         CANShooterSubsystem shooter,
         CANSpindexerSubsystem spindexer,
-        CANIntakeSubsystem intakeSubsystem
+        CANIntakeSubsystem intake
     ) {
-        return drive.dropIntake().andThen(shooter.run(spindexer, intakeSubsystem)).withTimeout(10);
+        return drive.dropIntake().andThen(shooter.run(spindexer, intake)).withTimeout(10);
+    }
+
+    public static Command moveToCenter(CANDriveSubsystem drive) {
+        // Might need to tweak duration
+        return drive.run(() -> 1, () -> 0, false).withTimeout(0.5);
     }
 }
